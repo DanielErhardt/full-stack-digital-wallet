@@ -1,0 +1,28 @@
+{
+  "root": true,
+  "env": {
+    "browser": false,
+    "node": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "ignorePatterns":["*.js"],
+  "rules":{
+    "@typescript-eslint/lines-between-class-members": "off"
+  }
+}
