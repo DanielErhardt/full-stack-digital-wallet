@@ -19,6 +19,7 @@ class App {
     this.app.use(express.json());
     this.app.use(cors());
     this.app.use('/users', routers.users);
+    this.app.use('/accounts', routers.accounts);
     this.app.use(errorHandler);
   }
 
