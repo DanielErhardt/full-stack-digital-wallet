@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+  frontend:
+    container_name: ng-cash_frontend
+    build: ./frontend
+    working_dir: /app
+    ports:
+      - 3000:3000
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3000" ]
+      timeout: 10s
+      retries: 5
+    networks:
+      - ng-cash_front-back
+
+  backend:
+    container_name: ng-cash_backend
+    build: ./backend
+    working_dir: /api
+    ports:
+      - 3001:3001
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3001" ]
+      timeout: 10s
+      retries: 5
+    networks:
+      - ng-cash_front-back
+      - ng-cash_back-db
+
+  db:
+    image: postgres:15.1
+    container_name: ng-cash_db
+    platform: linux/x86_64
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ng-cash
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "db_prod" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+    networks:
+      - ng-cash_back-db
+    cap_add:
+      - SYS_NICE
+
+networks:
+  ng-cash_front-back: {}
+  ng-cash_back-db: {}
