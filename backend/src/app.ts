@@ -1,6 +1,7 @@
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
+import ErrorHandler from './middlewares/ErrorHandler';
 
 class App {
   public app: express.Express;
@@ -16,6 +17,7 @@ class App {
   private async config(): Promise<void> {
     this.app.use(express.json());
     this.app.use(cors());
+    this.app.use(ErrorHandler.handle);
   }
 
   public start(PORT: string | number): void {
