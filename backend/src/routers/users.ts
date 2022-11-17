@@ -8,5 +8,3 @@ router.get('/test', async (_req, res) => {
   const user = await User.create({ username: 'user', password: 'pass', accountId: uuid() });
   res.status(200).json(user);
 });
-
-export default router;
