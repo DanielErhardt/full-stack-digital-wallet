@@ -1,8 +1,8 @@
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
-import ErrorHandler from './middlewares/ErrorHandler';
-import routers from './routers';
+import errorHandler from './middlewares/errorHandler';
+import * as routers from './routers';
 
 class App {
   public app: express.Express;
@@ -19,7 +19,7 @@ class App {
     this.app.use(express.json());
     this.app.use(cors());
     this.app.use('/users', routers.users);
-    this.app.use(ErrorHandler.handle);
+    this.app.use(errorHandler);
   }
 
   public start(PORT: string | number): void {
