@@ -1,5 +1,1 @@
-import users from './users';
-
-export default {
-  users,
-};
+export { router as users } from './users';
