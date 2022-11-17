@@ -20,6 +20,7 @@ class App {
     this.app.use(cors());
     this.app.use('/users', routers.users);
     this.app.use('/accounts', routers.accounts);
+    this.app.use('/transactions', routers.transactions);
     this.app.use(errorHandler);
   }
 
