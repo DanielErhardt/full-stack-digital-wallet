@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node .",
     "dev": "tsnd --respawn ./src/server.ts",
-    "build": "rm -rf build && npx tsc",
+    "build": "rm -rf dist && npx tsc",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "restart": "npm run build && npm run db:reset && npm run dev"
   },
