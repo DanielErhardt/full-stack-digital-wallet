@@ -12,8 +12,8 @@ class RequestError extends Error {
     return new RequestError(codes.NOT_FOUND, message);
   }
 
-  static usernameAlreadyExists() {
-    return new RequestError(codes.CONFLICT, 'Requested username is already in use.');
+  static conflict(message = 'A conflict was detected.') {
+    return new RequestError(codes.CONFLICT, message);
   }
 }
 
