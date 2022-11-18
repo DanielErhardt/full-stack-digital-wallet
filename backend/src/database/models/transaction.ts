@@ -37,6 +37,7 @@ Transaction.init({
   underscored: true,
   sequelize,
   timestamps: false,
+  tableName: 'transactions',
 });
 
 export default Transaction;

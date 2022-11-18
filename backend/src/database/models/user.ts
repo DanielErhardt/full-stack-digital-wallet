@@ -31,6 +31,10 @@ User.init({
   underscored: true,
   sequelize,
   timestamps: false,
+  tableName: 'users',
 });
+
+User.hasOne(Account, { foreignKey: 'id', as: 'account' });
+Account.belongsTo(User, { foreignKey: 'id', as: 'owner' });
 
 export default User;

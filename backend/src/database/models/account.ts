@@ -19,6 +19,7 @@ Account.init({
 }, {
   sequelize,
   timestamps: false,
+  tableName: 'accounts',
 });
 
 export default Account;
