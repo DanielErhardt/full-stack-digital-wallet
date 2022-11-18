@@ -2,7 +2,9 @@ import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
 import errorHandler from './middlewares/errorHandler';
-import * as routers from './routers';
+import { usersRouter } from './routers/users';
+import { accountsRouter } from './routers/accounts';
+import { transactionsRouter } from './routers/transactions';
 
 class App {
   public app: express.Express;
@@ -18,9 +20,9 @@ class App {
   private async config(): Promise<void> {
     this.app.use(express.json());
     this.app.use(cors());
-    this.app.use('/users', routers.users);
-    this.app.use('/accounts', routers.accounts);
-    this.app.use('/transactions', routers.transactions);
+    this.app.use('/users', usersRouter);
+    this.app.use('/accounts', accountsRouter);
+    this.app.use('/transactions', transactionsRouter);
     this.app.use(errorHandler);
   }
 

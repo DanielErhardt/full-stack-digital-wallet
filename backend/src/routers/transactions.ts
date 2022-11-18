@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import Transaction from '../database/models/transaction';
 
-export const router = Router();
+export const transactionsRouter = Router();
 
-router.get('/test', async (_req, res) => {
+transactionsRouter.get('/test', async (_req, res) => {
   const created = await Transaction.create({
     value: 10,
     debitedAccount: 'c9a82002-4780-43d4-9ccd-72a4604dd6d4',

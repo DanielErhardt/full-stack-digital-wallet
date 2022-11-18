@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { v4 as uuid } from 'uuid';
-import User from '../database/models/user';
+import UserController from '../controller/UserController';
 
-export const router = Router();
+export const usersRouter = Router();
+const controller = new UserController();
 
-router.get('/test', async (_req, res) => {
-  const user = await User.create({ username: 'user', password: 'pass', accountId: uuid() });
-  res.status(200).json(user);
-});
+usersRouter.get('/', controller.findAll);
+
+usersRouter.post('/', controller.createOne);
