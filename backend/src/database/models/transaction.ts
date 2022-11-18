@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import db from '.';
+import sequelize from '.';
 
 class Transaction extends Model {
   public id!: string;
@@ -35,7 +35,7 @@ Transaction.init({
   },
 }, {
   underscored: true,
-  sequelize: db,
+  sequelize,
   timestamps: false,
 });
 

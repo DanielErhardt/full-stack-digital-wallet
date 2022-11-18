@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import db from '.';
+import sequelize from '.';
 
 class Account extends Model {
   public id!: string;
@@ -17,7 +17,7 @@ Account.init({
     allowNull: false,
   },
 }, {
-  sequelize: db,
+  sequelize,
   timestamps: false,
 });
 

@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import db from '.';
+import sequelize from '.';
 
 class User extends Model {
   public id!: string;
@@ -28,7 +28,7 @@ User.init({
   },
 }, {
   underscored: true,
-  sequelize: db,
+  sequelize,
   timestamps: false,
 });
 
