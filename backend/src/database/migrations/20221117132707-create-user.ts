@@ -12,6 +12,7 @@ export default {
         account_id: {
           type: DataTypes.UUID,
           allowNull: false,
+          references: { model: 'accounts', key: 'id' },
         },
         username: {
           type: DataTypes.STRING(50),
