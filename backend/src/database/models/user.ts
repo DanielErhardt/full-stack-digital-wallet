@@ -33,7 +33,7 @@ User.init({
   timestamps: false,
 });
 
-User.hasOne(Account, { foreignKey: 'id', as: 'account' });
-Account.belongsTo(User, { foreignKey: 'id', as: 'owner' });
+User.belongsTo(Account, { foreignKey: 'accountId', as: 'account' });
+Account.hasOne(User, { foreignKey: 'accountId', as: 'owner' });
 
 export default User;
