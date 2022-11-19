@@ -1,4 +1,4 @@
-type Entity = {
+export type Entity = {
   id?: string;
 };
 
