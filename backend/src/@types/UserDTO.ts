@@ -1,7 +1,8 @@
-import { EntityDTO } from './EntityDTO';
+import { Transaction, User, Account } from '.';
 
-export type UserDTO = EntityDTO & {
-  username: string;
-  password: string;
-  accountId: string;
+export type UserDTO = User & {
+  account?: Account & {
+    cashIn?: Transaction;
+    cashOut?: Transaction;
+  }
 };

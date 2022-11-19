@@ -1,5 +1,7 @@
-import { EntityDTO } from './EntityDTO';
+import { Account, Transaction, User } from '.';
 
-export type AccountDTO = EntityDTO & {
-  balance: number;
+export type AccountDTO = Account & {
+  owner?: User;
+  cashOut?: Transaction[];
+  cashIn?: Transaction[];
 };

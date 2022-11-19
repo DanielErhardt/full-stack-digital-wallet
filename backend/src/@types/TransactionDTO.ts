@@ -1,8 +1,10 @@
-import { EntityDTO } from './EntityDTO';
+import { Account, Transaction, User } from '.';
 
-export type TransactionDTO = EntityDTO & {
-  value: number;
-  debitedAccount: string;
-  creditedAccount: string;
-  createdAt?: string;
+export type TransactionDTO = Transaction & {
+  cashIn?: Account & {
+    owner?: User;
+  };
+  cashOut?: Account & {
+    owner?: User;
+  };
 };
