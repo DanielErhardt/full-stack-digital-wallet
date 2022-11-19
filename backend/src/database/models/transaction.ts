@@ -40,9 +40,9 @@ Transaction.init({
   timestamps: false,
 });
 
-Transaction.belongsTo(Account, { foreignKey: 'debitedAccount', as: 'cashOut' });
-Transaction.belongsTo(Account, { foreignKey: 'creditedAccount', as: 'cashIn' });
-Account.hasMany(Transaction, { foreignKey: 'debitedAccount', as: 'cashOut' });
-Account.hasMany(Transaction, { foreignKey: 'creditedAccount', as: 'cashIn' });
+Transaction.belongsTo(Account, { foreignKey: 'debitedAccount', as: 'cashOutAccount' });
+Transaction.belongsTo(Account, { foreignKey: 'creditedAccount', as: 'cashInAccount' });
+Account.hasMany(Transaction, { foreignKey: 'debitedAccount', as: 'cashOutTransactions' });
+Account.hasMany(Transaction, { foreignKey: 'creditedAccount', as: 'cashInTransactions' });
 
 export default Transaction;

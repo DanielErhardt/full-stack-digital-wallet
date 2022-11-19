@@ -1,10 +1,10 @@
 import { Account, Transaction, User } from '.';
 
 export type TransactionDTO = Transaction & {
-  cashIn?: Account & {
+  cashInAccount?: Account & {
     owner?: User;
   };
-  cashOut?: Account & {
+  cashOutAccount?: Account & {
     owner?: User;
   };
 };
