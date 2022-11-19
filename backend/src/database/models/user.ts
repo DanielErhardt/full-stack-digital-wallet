@@ -28,10 +28,9 @@ User.init({
     allowNull: false,
   },
 }, {
-  underscored: true,
   sequelize,
+  underscored: true,
   timestamps: false,
-  tableName: 'users',
 });
 
 User.hasOne(Account, { foreignKey: 'id', as: 'account' });

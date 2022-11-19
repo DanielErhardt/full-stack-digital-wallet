@@ -34,10 +34,9 @@ Transaction.init({
     defaultValue: DataTypes.NOW,
   },
 }, {
-  underscored: true,
   sequelize,
+  underscored: true,
   timestamps: false,
-  tableName: 'transactions',
 });
 
 export default Transaction;

@@ -18,8 +18,8 @@ Account.init({
   },
 }, {
   sequelize,
+  underscored: true,
   timestamps: false,
-  tableName: 'accounts',
 });
 
 export default Account;
