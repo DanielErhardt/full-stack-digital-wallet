@@ -8,7 +8,9 @@ const auth = (req: Request, next: NextFunction, userRole = '') => {
 
   if (!authorization) throw RequestError.unauthorized('Token not found.');
 
-  const { id, username, role } = Token.validate(authorization) as JwtPayload;
+  const {
+    id, username, role, accountId,
+  } = Token.validate(authorization) as JwtPayload;
 
   if (!role) throw RequestError.badRequest('Token has no role assigned to it.');
 
@@ -16,6 +18,7 @@ const auth = (req: Request, next: NextFunction, userRole = '') => {
 
   req.headers.userId = id;
   req.headers.username = username;
+  req.headers.accountId = accountId;
 
   return next();
 };
