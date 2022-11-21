@@ -18,14 +18,14 @@ class AccountService {
   /** Transfers cash between 2 NG Cash accounts.
    * Creates a transaction in the database if no errors are found.
   */
-  static async transferCash(username: string, cashTransfer: CashTransferDTO): Promise<void> {
+  static async transferCash(debitedUsername: string, cashTransfer: CashTransferDTO): Promise<void> {
     const { creditedUsername, value } = cashTransfer;
 
     const credited = await this._model.findByOwnerName(creditedUsername);
     if (!credited) throw RequestError.notFound(`${creditedUsername}'s account not found.`);
 
-    const debited = await this._model.findByOwnerName(username);
-    if (!debited) throw RequestError.notFound(`${username}'s account not found.`);
+    const debited = await this._model.findByOwnerName(debitedUsername);
+    if (!debited) throw RequestError.notFound(`${debitedUsername}'s account not found.`);
 
     if (debited.balance < value) throw RequestError.unprocessableEntity('Insuficient funds.');
 
