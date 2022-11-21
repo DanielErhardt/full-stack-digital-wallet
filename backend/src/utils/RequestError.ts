@@ -23,6 +23,10 @@ class RequestError extends Error {
   static unprocessableEntity(message = 'Unprocessable entity.') {
     return new RequestError(codes.UNPROCESSABLE_ENTITY, message);
   }
+
+  static badRequest(message = 'Bad request.') {
+    return new RequestError(codes.BAD_REQUEST, message);
+  }
 }
 
 export default RequestError;
