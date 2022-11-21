@@ -1,7 +1,8 @@
 import { AccountDTO } from '../@types/AccountDTO';
-import Account from '../database/models/account';
-import User from '../database/models/user';
 import RequestError from '../utils/RequestError';
+import AccountModel from '../models/AccountModel';
+import { CashTransferDTO } from '../@types/CashTransferDTO';
+import TransactionService from './TransactionService';
 
 class AccountService {
   private static _model = new AccountModel();
@@ -14,12 +15,30 @@ class AccountService {
     return this._model.createOne(account);
   }
 
-  static async findAll(): Promise<AccountDTO[]> {
-    return Account.findAll({
-      include: [
-        { model: User, as: 'owner', attributes: { exclude: ['account_id', 'password'] } },
-      ],
-    });
+  /** Transfers cash between 2 NG Cash accounts.
+   * Creates a transaction in the database if no errors are found.
+  */
+  static async transferCash(username: string, cashTransfer: CashTransferDTO): Promise<void> {
+    const { creditedUsername, value } = cashTransfer;
+
+    const credited = await this._model.findByOwnerName(creditedUsername);
+    if (!credited) throw RequestError.notFound(`${creditedUsername}'s account not found.`);
+
+    const debited = await this._model.findByOwnerName(username);
+    if (!debited) throw RequestError.notFound(`${username}'s account not found.`);
+
+    if (debited.balance < value) throw RequestError.unprocessableEntity('Insuficient funds.');
+
+    await Promise.all([
+      this._model.updateOne(debited.id, { balance: +debited.balance - value }),
+      this._model.updateOne(credited.id, { balance: +credited.balance - value }),
+      TransactionService.createTransaction({
+        value,
+        creditedAccount: credited.id,
+        debitedAccount: debited.id,
+      }),
+    ]);
+  }
   }
 
   static async findById(id: string): Promise<AccountDTO> {
