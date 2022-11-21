@@ -32,9 +32,9 @@ class UserService {
 
     const hash = BCrypt.encrypt(password as string);
 
-    const { id: accountId } = await AccountService.createOne();
+    const { id } = await AccountService.createOne();
 
-    return this._model.createOne({ username, password: hash, accountId });
+    return this._model.createOne({ username, password: hash, accountId: id as string });
   }
 
   static async findById(id: string): Promise<UserDTO> {
