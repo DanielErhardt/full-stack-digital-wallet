@@ -3,9 +3,10 @@ import codes from 'http-status-codes';
 import UserService from '../services/UserService';
 
 class UserController {
-  static async findAll(_req: Request, res: Response) {
-    const users = await UserService.findAll();
-    res.status(codes.OK).json(users);
+  static async login(req: Request, res: Response): Promise<Response> {
+    const { body: { username, password } } = req;
+    const user = await UserService.login(username, password);
+    return res.status(codes.OK).json(user);
   }
 
   static async createOne(req: Request, res: Response) {

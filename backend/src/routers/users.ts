@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import UserController from '../controller/UserController';
+import { validateLogin } from '../middlewares/validations';
 
 export const usersRouter = Router();
 
-usersRouter.get('/', UserController.findAll);
-
 usersRouter.post('/', UserController.createOne);
+
+usersRouter.post('/login', validateLogin, UserController.login);

@@ -6,6 +6,24 @@ import Token from '../utils/Token';
 import AccountService from './AccountService';
 
 class UserService {
+  private static _model = new UserModel();
+
+  /** Checks if username exists, then validates password.
+   * @returns A JWT token with user info as payload. */
+  static async login(username: string, password: string) {
+    const user = await this._model.login(username);
+    if (!user) throw RequestError.notFound('User not found.');
+
+    const { password: hash } = user;
+
+    if (!BCrypt.validate(password, hash as string)) {
+      throw RequestError.unauthorized('Invalid password.');
+    }
+    delete user.password;
+    const token = Token.create(user);
+    return { token, user };
+  }
+
   static async createOne(user: UserDTO): Promise<UserDTO> {
     const { username, password } = user;
     const found = await this._model.findByUsername(username);

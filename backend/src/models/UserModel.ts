@@ -19,6 +19,10 @@ class UserModel extends Model<User, UserDTO> {
     super(User);
   }
 
+  async login(username: string): Promise<UserDTO | null> {
+    return this._model.findOne({ where: { username }, raw: true });
+  }
+
   async findByUsername(username: string): Promise<UserDTO | null> {
     return this._model.findOne({
       where: { username },
