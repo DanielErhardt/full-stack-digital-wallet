@@ -1,4 +1,6 @@
-import { sign, verify, SignOptions } from 'jsonwebtoken';
+import {
+  sign, verify, SignOptions, JwtPayload,
+} from 'jsonwebtoken';
 
 class Token {
   private static secret = process.env.JWT_SECRET as string;
@@ -8,8 +10,8 @@ class Token {
     expiresIn: '7d',
   };
 
-  public static create(userId: number) {
-    return sign({ id: userId }, this.secret, this.options);
+  public static create(payload: JwtPayload) {
+    return sign(payload, this.secret, this.options);
   }
 
   public static validate(token: string) {
