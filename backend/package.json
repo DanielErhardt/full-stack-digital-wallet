@@ -3,6 +3,9 @@
     "start": "node .",
     "dev": "tsnd --respawn ./src/server.ts",
     "build": "rm -rf dist && npx tsc",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "test:coverage": "nyc npm run test",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "restart": "npm run build && npm run db:reset && npm run dev"
   },
