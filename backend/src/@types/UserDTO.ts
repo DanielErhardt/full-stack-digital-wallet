@@ -7,4 +7,5 @@ export type UserDTO = User & {
     cashInTransaction?: Transaction;
     cashOutTransaction?: Transaction;
   }
+  dependents?: User[];
 };
