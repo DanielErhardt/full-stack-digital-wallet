@@ -7,6 +7,7 @@ class User extends Model {
   public username!: string;
   public password!: string;
   public accountId!: string;
+  public role!: 'user' | 'parent';
 }
 
 User.init({
@@ -26,6 +27,12 @@ User.init({
   accountId: {
     type: DataTypes.UUID,
     allowNull: false,
+  },
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    values: ['user', 'parent'],
+    defaultValue: 'user',
   },
 }, {
   sequelize,
