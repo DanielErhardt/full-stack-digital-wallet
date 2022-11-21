@@ -17,7 +17,7 @@ export const validateCashTransfer: RequestHandler = (req, _res, next) => {
   validateSchema(req, next, cashTransferSchema);
 };
 
-export const validateLogin: RequestHandler = (req, _res, next) => {
+export const validateUserForm: RequestHandler = (req, _res, next) => {
   validateSchema(req, next, userFormSchema);
 };
 
