@@ -1,7 +1,7 @@
 import {
   CreationAttributes, Model as SeqModel, ModelStatic, Includeable, WhereOptions,
 } from 'sequelize';
-import { Entity } from '../@types';
+import { Entity } from '../@types/Entities/Entity';
 
 abstract class Model<T extends SeqModel, U extends Entity> {
   protected _model: ModelStatic<T>;
@@ -12,7 +12,7 @@ abstract class Model<T extends SeqModel, U extends Entity> {
     this._model = model;
   }
 
-  async createOne(account: Partial<U>): Promise<T> {
+  async createOne(account: U): Promise<T> {
     return this._model.create(account as CreationAttributes<T>);
   }
 
