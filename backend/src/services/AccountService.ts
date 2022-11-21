@@ -39,13 +39,6 @@ class AccountService {
       }),
     ]);
   }
-  }
-
-  static async findById(id: string): Promise<AccountDTO> {
-    const account = await Account.findByPk(id);
-    if (!account) throw RequestError.notFound('Account not found');
-    return account;
-  }
 }
 
 export default AccountService;
