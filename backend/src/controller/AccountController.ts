@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
 import codes from 'http-status-codes';
-import { CashTransferDTO } from '../@types/CashTransferDTO';
 import AccountService from '../services/AccountService';
 
 class AccountController {
-  static async transferCash(req: Request, res: Response): Promise<Response> {
-    const { headers: { username } } = req;
-    const transferData = req.body as CashTransferDTO;
-    const { creditedUsername, value } = transferData;
-    await AccountService.transferCash(username as string, transferData);
-    return res.status(codes.OK).json({
-      message: `${username} successfully sent R$${value} cash to ${creditedUsername}`,
-    });
+  static async findUserTransactions(req: Request, res: Response) {
+    const { headers: { accountId } } = req;
+    const transactions = await AccountService.findTransactionsByAccountId(accountId as string);
+    res.status(codes.OK).json(transactions);
+  }
+
+  static async findTransactionsByAccountId(req: Request, res: Response) {
+    const { params: { accountId } } = req;
+    const transactions = await AccountService.findTransactionsByAccountId(accountId);
+    res.status(codes.OK).json(transactions);
   }
 }
 

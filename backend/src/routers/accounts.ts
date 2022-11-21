@@ -4,4 +4,6 @@ import auth from '../middlewares/authentication';
 
 export const accountsRouter = Router();
 
-accountsRouter.post('/transfer', auth.any, AccountController.transferCash);
+accountsRouter.get('/transactions', auth.any, AccountController.findUserTransactions);
+
+accountsRouter.get('/transactions/dependent/:accountId', auth.guardian, AccountController.findTransactionsByAccountId);
