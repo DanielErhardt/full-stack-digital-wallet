@@ -9,10 +9,16 @@ class UserController {
     return res.status(codes.OK).json(user);
   }
 
-  static async createOne(req: Request, res: Response) {
+  static async createOne(req: Request, res: Response): Promise<Response> {
     const { body } = req;
     const user = await UserService.createOne(body);
-    res.status(codes.CREATED).json(user);
+    return res.status(codes.CREATED).json(user);
+  }
+
+  static async findDependents(req: Request, res: Response): Promise<Response> {
+    const { headers: { userId: guardianId } } = req;
+    const dependents = await UserService.findDependents(guardianId as string);
+    return res.status(codes.OK).json(dependents);
   }
 }
 

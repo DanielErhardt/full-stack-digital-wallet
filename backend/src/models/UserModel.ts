@@ -1,6 +1,8 @@
 import { UserDTO } from '../@types/UserDTO';
 import User from '../database/models/user';
-import { cashInTransactions, cashOutTransactions, userAccount } from './associations';
+import {
+  cashInTransactions, cashOutTransactions, userAccount, dependents,
+} from './associations';
 import Model from './Model';
 
 class UserModel extends Model<User, UserDTO> {
@@ -29,6 +31,21 @@ class UserModel extends Model<User, UserDTO> {
       include: this._associations,
       attributes: { exclude: this._excludeAttributes },
     });
+  }
+
+  async findDependents(guardianId: string): Promise<UserDTO[]> {
+    const guardian = await this._model.findByPk(guardianId, { include: [dependents] }) as UserDTO;
+
+    if (!guardian) return [];
+
+    const foundDependents = guardian.dependents as UserDTO[];
+
+    // This removes an unwanted property that I could not remove through the association.
+    return foundDependents.map(({
+      id, username, accountId, role, account,
+    }) => ({
+      id, username, accountId, role, account,
+    }));
   }
 }
 
