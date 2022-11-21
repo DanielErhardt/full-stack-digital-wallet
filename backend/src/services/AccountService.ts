@@ -1,8 +1,6 @@
 import { AccountDTO } from '../@types/AccountDTO';
 import RequestError from '../utils/RequestError';
 import AccountModel from '../models/AccountModel';
-import { CashTransferDTO } from '../@types/CashTransferDTO';
-import TransactionService from './TransactionService';
 
 class AccountService {
   private static _model = new AccountModel();
@@ -15,29 +13,31 @@ class AccountService {
     return this._model.createOne(account);
   }
 
-  /** Transfers cash between 2 NG Cash accounts.
-   * Creates a transaction in the database if no errors are found.
-  */
-  static async transferCash(debitedUsername: string, cashTransfer: CashTransferDTO): Promise<void> {
-    const { creditedUsername, value } = cashTransfer;
+  static async findByOwnerName(username: string): Promise<AccountDTO> {
+    const account = await this._model.findByOwnerName(username);
+    if (!account) throw RequestError.notFound(`${username}'s account not found.`);
+    return account;
+  }
 
-    const credited = await this._model.findByOwnerName(creditedUsername);
-    if (!credited) throw RequestError.notFound(`${creditedUsername}'s account not found.`);
+  static async findByOwnerId(userId: string): Promise<AccountDTO> {
+    const account = await this._model.findByOwnerId(userId);
+    if (!account) throw RequestError.notFound(`Account with owner id ${userId} not found.`);
+    return account;
+  }
 
-    const debited = await this._model.findByOwnerName(debitedUsername);
-    if (!debited) throw RequestError.notFound(`${debitedUsername}'s account not found.`);
+  static async updateOne(accountId: string, attributes: Partial<AccountDTO>) {
+    return this._model.updateOne(accountId, attributes);
+  }
 
-    if (debited.balance < value) throw RequestError.unprocessableEntity('Insuficient funds.');
+  static async findTransactionsByAccountId(accountId: string) {
+    const account = await this._model.findById(accountId, true) as AccountDTO;
+    if (!account) throw RequestError.notFound(`Account with id ${accountId} not found.`);
 
-    await Promise.all([
-      this._model.updateOne(debited.id, { balance: +debited.balance - value }),
-      this._model.updateOne(credited.id, { balance: +credited.balance - value }),
-      TransactionService.createTransaction({
-        value,
-        creditedAccount: credited.id,
-        debitedAccount: debited.id,
-      }),
-    ]);
+    const { cashInTransactions, cashOutTransactions } = account;
+    return {
+      cashInTransactions: cashInTransactions || [],
+      cashOutTransactions: cashOutTransactions || [],
+    };
   }
 }
 
