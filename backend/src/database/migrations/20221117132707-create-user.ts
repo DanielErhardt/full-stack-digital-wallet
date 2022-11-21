@@ -25,7 +25,7 @@ export default {
         role: {
           type: DataTypes.STRING(10),
           allowNull: false,
-          values: ['user', 'parent'],
+          values: ['user', 'guardian'],
           defaultValue: 'user',
         },
       });

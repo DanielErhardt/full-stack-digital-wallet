@@ -4,6 +4,6 @@ import { User } from './Entities/User';
 
 export type AccountDTO = Account & {
   owner?: User;
-  cashOutTransaction?: Transaction[];
-  cashInTransaction?: Transaction[];
+  cashOutTransactions?: Transaction[];
+  cashInTransactions?: Transaction[];
 };

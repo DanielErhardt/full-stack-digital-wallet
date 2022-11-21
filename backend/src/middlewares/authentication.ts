@@ -8,7 +8,7 @@ const auth = (req: Request, next: NextFunction, userRole = '') => {
 
   if (!authorization) throw RequestError.unauthorized('Token not found.');
 
-  const { id, username, role } = Token.validate('authorization') as JwtPayload;
+  const { id, username, role } = Token.validate(authorization) as JwtPayload;
 
   if (!role) throw RequestError.badRequest('Token has no role assigned to it.');
 
@@ -24,8 +24,8 @@ const any: RequestHandler = (req, _res, next) => {
   auth(req, next);
 };
 
-const parent: RequestHandler = (req, _res, next) => {
-  auth(req, next, 'parent');
+const guardian: RequestHandler = (req, _res, next) => {
+  auth(req, next, 'guardian');
 };
 
-export default { any, parent };
+export default { any, guardian };

@@ -6,4 +6,4 @@ export const userFormSchema = z.object({
 });
 
 //* * User data input. For login and new user creation. */
-export type UserFormDTO = z.infer<typeof userFormSchema>;
+export type UserFormInput = z.infer<typeof userFormSchema>;

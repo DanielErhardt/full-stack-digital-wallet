@@ -1,9 +1,9 @@
 import { NextFunction, Request, RequestHandler } from 'express';
 import { ZodSchema } from 'zod';
-import { cashTransferSchema } from '../@types/CashTransferDTO';
+import { cashTransferSchema } from '../@types/Inputs/TransactionInput';
 import { userSchema } from '../@types/Entities/User';
 
-import { userFormSchema } from '../@types/UserFormDTO';
+import { userFormSchema } from '../@types/Inputs/UserFormInput';
 
 const validateSchema = (req: Request, next: NextFunction, schema: ZodSchema) => {
   const { body } = req;
@@ -13,7 +13,7 @@ const validateSchema = (req: Request, next: NextFunction, schema: ZodSchema) => 
   next();
 };
 
-export const validateCashTransfer: RequestHandler = (req, _res, next) => {
+export const validateTransaction: RequestHandler = (req, _res, next) => {
   validateSchema(req, next, cashTransferSchema);
 };
 

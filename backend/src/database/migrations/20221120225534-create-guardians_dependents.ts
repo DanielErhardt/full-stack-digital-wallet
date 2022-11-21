@@ -3,14 +3,14 @@ import { QueryInterface, DataTypes } from 'sequelize';
 export default {
   up: (queryInterface: QueryInterface): Promise<void> => queryInterface.sequelize.transaction(
     async () => {
-      await queryInterface.createTable('parents_children', {
-        parent_id: {
+      await queryInterface.createTable('guardians_dependents', {
+        guardian_id: {
           type: DataTypes.UUID,
           allowNull: false,
           primaryKey: true,
           references: { model: 'users', key: 'id' },
         },
-        child_id: {
+        dependent_id: {
           type: DataTypes.UUID,
           allowNull: false,
           primaryKey: true,
@@ -22,7 +22,7 @@ export default {
 
   down: (queryInterface: QueryInterface): Promise<void> => queryInterface.sequelize.transaction(
     async () => {
-      await queryInterface.dropTable('parents_children');
+      await queryInterface.dropTable('guardians_dependents');
     },
   ),
 };

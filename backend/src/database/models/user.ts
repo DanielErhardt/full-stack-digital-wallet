@@ -7,7 +7,7 @@ class User extends Model {
   public username!: string;
   public password!: string;
   public accountId!: string;
-  public role!: 'user' | 'parent';
+  public role!: 'user' | 'guardian';
 }
 
 User.init({
@@ -31,7 +31,7 @@ User.init({
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-    values: ['user', 'parent'],
+    values: ['user', 'guardian'],
     defaultValue: 'user',
   },
 }, {
