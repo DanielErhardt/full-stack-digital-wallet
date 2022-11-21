@@ -15,6 +15,14 @@ class RequestError extends Error {
   static conflict(message = 'A conflict was detected.') {
     return new RequestError(codes.CONFLICT, message);
   }
+
+  static unauthorized(message = 'Unauthorized') {
+    return new RequestError(codes.UNAUTHORIZED, message);
+  }
+
+  static unprocessableEntity(message = 'Unprocessable entity.') {
+    return new RequestError(codes.UNPROCESSABLE_ENTITY, message);
+  }
 }
 
 export default RequestError;
