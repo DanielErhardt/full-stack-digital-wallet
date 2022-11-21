@@ -1,35 +1,32 @@
 import { UserDTO } from '../@types/UserDTO';
 import RequestError from '../utils/RequestError';
-import User from '../database/models/user';
-import Account from '../database/models/account';
+import UserModel from '../models/UserModel';
+import BCrypt from '../utils/BCrypt';
+import Token from '../utils/Token';
+import AccountService from './AccountService';
 
 class UserService {
   static async createOne(user: UserDTO): Promise<UserDTO> {
-    const { username } = user;
-    const found = await this.findByUsername(username);
+    const { username, password } = user;
+    const found = await this._model.findByUsername(username);
+
     if (found) throw RequestError.conflict(`Username ${username} already in use.`);
 
-    const created = await User.create(user);
-    return created;
-  }
+    const hash = BCrypt.encrypt(password as string);
 
-  static async findAll(): Promise<UserDTO[]> {
-    return User.findAll({
-      include: [
-        { model: Account, as: 'account' },
-      ],
-    });
+    const { id: accountId } = await AccountService.createOne();
+
+    return this._model.createOne({ username, password: hash, accountId });
   }
 
   static async findById(id: string): Promise<UserDTO> {
-    const user = await User.findByPk(id);
+    const user = await this._model.findById(id);
     if (!user) throw RequestError.notFound(`User with id ${id} was not found.`);
-
     return user;
   }
 
   static async findByUsername(username: string): Promise<UserDTO> {
-    const user = await User.findOne({ where: { username } });
+    const user = await this._model.findByUsername(username);
     if (!user) throw RequestError.notFound(`Username ${username} was not found.`);
     return user;
   }
