@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import AccountController from '../controller/AccountController';
-import authentication from '../middlewares/authenticate';
+import auth from '../middlewares/authentication';
 
 export const accountsRouter = Router();
 
-accountsRouter.post('/transfer', authentication, AccountController.transferCash);
+accountsRouter.post('/transfer', auth.any, AccountController.transferCash);
