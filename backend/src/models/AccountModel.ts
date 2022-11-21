@@ -16,6 +16,26 @@ class AccountModel extends Model<Account, AccountDTO> {
   constructor() {
     super(Account);
   }
+
+  async findByOwnerName(username: string): Promise<Account | null> {
+    return this.findByOwnerAttribute('username', username);
+  }
+
+  async findByOwnerId(id: string): Promise<Account | null> {
+    return this.findByOwnerAttribute('id', id);
+  }
+
+  private async findByOwnerAttribute(attName: string, attValue: string): Promise<Account | null> {
+    const account = await Account.findOne({
+      include: [
+        { ...accountOwner, where: { [attName]: attValue } },
+        cashOutTransactions,
+        cashInTransactions,
+      ],
+      attributes: { exclude: this._excludeAttributes },
+    });
+    return account;
+  }
 }
 
 export default AccountModel;
