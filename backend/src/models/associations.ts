@@ -10,7 +10,7 @@ export const userAccount = {
 export const accountOwner = {
   model: User,
   as: 'owner',
-  attributes: { exclude: ['accountId', 'password'] },
+  attributes: { exclude: ['accountId', 'password', 'role'] },
 };
 
 export const cashInAccount = {
@@ -36,7 +36,7 @@ export const cashInTransactions = {
   as: 'cashInTransactions',
   attributes: { exclude: ['creditedAccount', 'debitedAccount'] },
   include: [
-    cashOutAccount,
+    { ...cashOutAccount },
   ],
 };
 
@@ -45,6 +45,12 @@ export const cashOutTransactions = {
   as: 'cashOutTransactions',
   attributes: { exclude: ['debitedAccount', 'creditedAccount'] },
   include: [
-    cashInAccount,
+    { ...cashInAccount },
   ],
+};
+
+export const dependents = {
+  model: User,
+  as: 'dependents',
+  attributes: { exclude: ['password', 'role'] },
 };
