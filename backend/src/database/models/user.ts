@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '.';
 import Account from './account';
+import GuardianDependent from './guardianDependent';
 
 class User extends Model {
   public id!: string;
@@ -40,6 +41,7 @@ User.init({
   timestamps: false,
 });
 
+User.belongsToMany(User, { through: GuardianDependent, foreignKey: 'guardianId', as: 'dependents' });
 User.belongsTo(Account, { foreignKey: 'accountId', as: 'account' });
 Account.hasOne(User, { foreignKey: 'accountId', as: 'owner' });
 
