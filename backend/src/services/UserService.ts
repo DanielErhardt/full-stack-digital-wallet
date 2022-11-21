@@ -48,6 +48,10 @@ class UserService {
     if (!user) throw RequestError.notFound(`Username ${username} was not found.`);
     return user;
   }
+
+  static async findDependents(guardianId: string): Promise<UserDTO[]> {
+    return this._model.findDependents(guardianId);
+  }
 }
 
 export default UserService;
