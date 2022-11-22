@@ -5,6 +5,7 @@
     "compose:up:dev": "docker-compose -f docker-compose.dev.yml up -d --build",
     "compose:down:dev": "docker-compose -f docker-compose.dev.yml down --remove-orphans",
     "logs": "docker-compose logs -f",
-    "logs:dev": "docker-compose -f docker-compose.dev.yml logs -f"
+    "logs:dev": "docker-compose -f docker-compose.dev.yml logs -f",
+    "db:build": "npm run --prefix ./backend db:reset"
   }
 }
