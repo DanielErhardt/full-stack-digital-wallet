@@ -1,6 +1,47 @@
 version: '3.9'
 services:
+  database:
+    image: postgres
+    platform: linux/x86_64
+    container_name: ng-cash_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: ng-cash
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "db_prod" ]
+      timeout: 10s
+      retries: 5
+    networks:
+      - ng-cash_back-db
+
+  backend:
+    platform: linux/x86_64
+    container_name: ng-cash_backend
+    build: ./backend
+    working_dir: /api
+    ports:
+      - 3001:3001
+    restart: always
+    command: npm run dev
+    volumes: 
+      - ./backend/src:/api/src
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3001" ]
+      timeout: 10s
+      retries: 5
+    networks:
+      - ng-cash_front-back
+      - ng-cash_back-db
+
   frontend:
+    platform: linux/x86_64
     container_name: ng-cash_frontend
     build: ./frontend
     ports:
@@ -13,54 +54,11 @@ services:
       backend:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
+      test: [ "CMD", "lsof", "-t", "-i:3000" ]
       timeout: 10s
       retries: 5
     networks:
       - ng-cash_front-back
-
-  backend:
-    container_name: ng-cash_backend
-    build: ./backend
-    ports:
-      - 3001:3001
-    working_dir: /api
-    restart: always
-    command: npm run dev
-    volumes: 
-      - ./backend/src:/api/src
-    depends_on:
-      db:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
-    networks:
-      - ng-cash_front-back
-      - ng-cash_back-db
-    env_file:
-      - ./backend/.env
-
-  db:
-    image: postgres:15.1
-    container_name: ng-cash_db
-    platform: linux/x86_64
-    restart: always
-    ports:
-      - 5432:5432
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
-      interval: 30s
-      timeout: 60s
-      retries: 5
-      start_period: 80s
-    networks:
-      - ng-cash_back-db
-    env_file:
-      - ./backend/.env
-    cap_add:
-      - SYS_NICE
 
 networks:
   ng-cash_front-back: {}
