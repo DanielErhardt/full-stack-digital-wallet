@@ -4,7 +4,7 @@ import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
 import NotFoundPage from './pages/NotFoundPage';
-import LoginPage from './pages/LoginPage';
+import FormPage from './pages/FormPage';
 import HomePage from './pages/HomePage';
 import AccountPage from './pages/AccountPage';
 import TransferPage from './pages/TransferPage';
@@ -14,7 +14,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<FormPage />} />
+        <Route path="/register" element={<FormPage isRegister />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/transfer" element={<TransferPage />} />
