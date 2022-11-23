@@ -1,9 +1,7 @@
 import React from 'react';
 
-function Button() {
-  return (
-    <div>Button</div>
-  );
-}
+const Button = () => (
+  <div>Button</div>
+);
 
 export default Button;

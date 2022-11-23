@@ -1,9 +1,7 @@
 import React from 'react';
 
-function TransferPage() {
-  return (
-    <div>TransferPage</div>
-  );
-}
+const TransferPage = () => (
+  <div>TransferPage</div>
+);
 
 export default TransferPage;

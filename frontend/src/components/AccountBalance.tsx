@@ -1,9 +1,7 @@
 import React from 'react';
 
-function AccountBalance() {
-  return (
-    <div>AccountBalance</div>
-  );
-}
+const AccountBalance = () => (
+  <div>AccountBalance</div>
+);
 
 export default AccountBalance;
