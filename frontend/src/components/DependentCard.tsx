@@ -8,6 +8,7 @@ type DependentCardProps = {
 
 const DependentCard: FC<DependentCardProps> = ({ username, id }) => (
   <Link
+    className="list-card"
     to={`/transactions/${id}`}
   >
     {username}

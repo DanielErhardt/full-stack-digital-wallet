@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AccountBalance from '../components/AccountBalance';
+import Button from '../components/Button';
 import Header from '../components/Header';
 import NGCashContext from '../context/NGCashContext';
 import API from '../utils/API';
@@ -21,7 +23,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <main>
+    <main className="home-page">
       <Header />
       <AccountBalance balance={balance} updateBalance={updateBalance} />
       <div className="home-buttons">

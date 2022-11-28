@@ -8,7 +8,7 @@ const DependentsPage = () => {
   const { dependents } = useContext(NGCashContext);
 
   return (
-    <main>
+    <main className="list-page">
       <Header />
       <List>
         {Object.entries(dependents as Record<string, string>).map(([depName, depId]) => (

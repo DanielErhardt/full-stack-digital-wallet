@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler, FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { FormInput } from '../@types/FormInput';
 import useKeyPress from '../hooks/useKeyPress';
+import Button from './Button';
 
 type FormProps = {
   onSubmit: () => void;
@@ -23,10 +23,38 @@ const UserAccountForm: FC<FormProps> = (props) => {
 
   return (
     <form>
+      <label htmlFor="username">
+        Username
+        <br />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          onChange={handleChange}
+          value={form.username}
+          placeholder="Your username here."
+        />
+      </label>
+
+      <label htmlFor="password">
+        Password
+        <br />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          onChange={handleChange}
+          value={form.password}
+          placeholder="Your password here."
+        />
+      </label>
+
       <Button
         innerText={isLogin ? 'LOGIN' : 'REGISTER'}
         onClick={onSubmit}
       />
+
+      <p className="form-message">{message}</p>
     </form>
   );
 };

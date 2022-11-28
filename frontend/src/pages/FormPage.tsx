@@ -1,7 +1,7 @@
 import React, {
   ChangeEventHandler, FC, useContext, useEffect, useState,
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FormInput } from '../@types/FormInput';
 import UserAccountForm from '../components/UserAccountForm';
 import NGCashContext from '../context/NGCashContext';
@@ -40,6 +40,7 @@ const FormPage: FC = () => {
   };
 
   return (
+    <main className="form-page">
       <img className="form-logo" src={`${process.env.PUBLIC_URL}/ng-cash-logo.jpg`} alt="logo" />
       <UserAccountForm
         onSubmit={onSubmit}
@@ -48,6 +49,8 @@ const FormPage: FC = () => {
         form={form}
         message={message}
       />
+
+      { isLogin && <Link to="/register">{'Don\'t have an account? Register now!'}</Link> }
     </main>
   );
 };

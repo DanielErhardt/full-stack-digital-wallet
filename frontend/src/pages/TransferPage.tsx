@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, useContext, useState } from 'react';
 import { TransferInput } from '../@types/TransferInput';
+import Button from '../components/Button';
 import NGCashContext from '../context/NGCashContext';
 import API from '../utils/API';
 
@@ -40,12 +41,40 @@ const TransferPage = () => {
 
   return (
     <main>
+      <form>
+        <label htmlFor="usr">
+          Transfer to:
+          <br />
+          <input
+            id="usr"
+            type="text"
+            name="username"
+            value={form.username}
+            placeholder="Receiver username here."
+            onChange={handleChange}
+          />
+        </label>
+
+        <label htmlFor="val">
+          Transfer amount:
+          <br />
+          <input
+            id="val"
+            type="number"
+            name="value"
+            placeholder="Transfer value here."
+            value={Number(form.value)}
+            onChange={handleChange}
+          />
+        </label>
 
         <Button
           innerText="Transfer"
           onClick={transfer}
         />
 
+        <p className="form-message">{message}</p>
+      </form>
     </main>
   );
 };
