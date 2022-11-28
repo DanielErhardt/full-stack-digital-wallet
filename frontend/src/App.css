@@ -1,38 +1,179 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  background-color: lightgrey;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: white;
+  margin-top: 5%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 360px;
+  height: 720px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  padding: 10px 10px 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px black;
+}
+
+form {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  border: 3px solid black;
+  box-shadow: 5px 5px black;
+}
+
+.form-logo {
+  width: 80%;
+}
+
+.form-message {
+  height: 36px;
+  width: 90%;
+}
+
+.form-page a {
+  position: fixed;
+  bottom: 20px;
+  color: black;
+}
+
+label {
+  background-color: white;
+  width: 95%;
+  padding: 15px 30px;
+  /* margin: 10px 0; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  border-radius: 10px;
+  border: 3px solid black;
+  box-shadow: 5px 5px black;
+}
+
+label input {
+  width: 260px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+main {
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-around;
+}
+
+.form-page {
+  justify-content: space-evenly;
+  padding-bottom: 50px;
+}
+
+.default-btn {
+  background-color: white;
+  font-weight: 900;
+  font-size: 16px;
+  width: 120px;
+  height: 40px;
+  border-radius: 5px;
+  box-shadow: 3px 3px black;
+}
+
+.home-page {
+  justify-content: center;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(50px);
+}
+
+.home-buttons button {
+  width: 200px;
+  height: 60px;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.account-form {
+  height: 150px;
+  margin-bottom: 50px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.list-page {
+  padding-top: 100px;
+  justify-content: start;
+  row-gap: 10px;
+}
+
+.trn-dependents {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  row-gap: 10px;
+}
+
+.list-card {
+  text-decoration: none;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 40px;
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 5px
 }
 
-.App-link {
-  color: #61dafb;
+.trn-type {
+  align-self: flex-start;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.trn-username, .trn-value {
+  font-size: 16px;
+  font-weight: bold;
+  align-self: center;
+}
+
+.trn-date {
+  align-self: flex-end;
 }
