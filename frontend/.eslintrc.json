@@ -19,5 +19,10 @@
     "react"
   ],
   "rules": {
+    "@typescript-eslint/lines-between-class-members": "off",
+    "no-underscore-dangle": "off",
+    "react/function-component-definition": "off",
+    "import/prefer-default-export": "off",
+    "react/no-array-index-key": "off"
   }
 }
