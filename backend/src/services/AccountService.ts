@@ -6,7 +6,7 @@ class AccountService {
   private static _model = new AccountModel();
 
   /** Creates a NG Cash Account
-   * @param account if not provided, new account will have balance value 0;
+   * @param account If account.balance is not provided, new account will have balance value of 0;
   */
   static async createOne(account: AccountDTO = { balance: 0 }): Promise<AccountDTO> {
     if (account.id) throw RequestError.conflict('Cannot provide ID in Account creation.');

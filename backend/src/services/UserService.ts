@@ -4,14 +4,17 @@ import UserModel from '../models/UserModel';
 import BCrypt from '../utils/BCrypt';
 import Token from '../utils/Token';
 import AccountService from './AccountService';
+import { UserFormInput } from '../@types/Inputs/UserFormInput';
 
 class UserService {
   private static _model = new UserModel();
 
   /** Checks if username exists, then validates password.
    * @returns A JWT token with user info as payload. */
-  static async login(username: string, password: string) {
+  static async login(formInput: UserFormInput): Promise<string> {
+    const { username, password } = formInput;
     const user = await this._model.login(username);
+
     if (!user) throw RequestError.notFound('User not found.');
 
     const { password: hash } = user;
@@ -19,38 +22,40 @@ class UserService {
     if (!BCrypt.validate(password, hash as string)) {
       throw RequestError.unauthorized('Invalid password.');
     }
-    delete user.password;
-    const token = Token.create(user);
-    return { token, user };
+
+    return Token.create(user);
   }
 
-  static async createOne(user: UserDTO): Promise<UserDTO> {
-    const { username, password } = user;
+  /** Checks if username exists, then creates a new user and account.
+   * @returns A JWT token with user info as payload. */
+  static async createOne(formInput: UserFormInput): Promise<string> {
+    const { username, password } = formInput;
     const found = await this._model.findByUsername(username);
 
-    if (found) throw RequestError.conflict(`Username ${username} already in use.`);
+    if (found) throw RequestError.conflict(`Username ${username} is already taken.`);
 
-    const hash = BCrypt.encrypt(password as string);
+    const hash = BCrypt.encrypt(password);
 
     const { id } = await AccountService.createOne();
+    const user = await this._model.createOne({ username, password: hash, accountId: id as string });
 
-    return this._model.createOne({ username, password: hash, accountId: id as string });
+    return Token.create(user.get({ plain: true }));
   }
 
-  static async findById(id: string): Promise<UserDTO> {
-    const user = await this._model.findById(id);
+  static async findById(id: string, associate = false): Promise<UserDTO> {
+    const user = await this._model.findById(id, associate);
     if (!user) throw RequestError.notFound(`User with id ${id} was not found.`);
     return user;
   }
 
-  static async findByUsername(username: string): Promise<UserDTO> {
-    const user = await this._model.findByUsername(username);
-    if (!user) throw RequestError.notFound(`Username ${username} was not found.`);
-    return user;
-  }
-
-  static async findDependents(guardianId: string): Promise<UserDTO[]> {
-    return this._model.findDependents(guardianId);
+  static async findDependents(guardianId: string): Promise<Record<string, string>> {
+    const dependents = await this._model.findDependents(guardianId);
+    return dependents
+      .reduce((acc: Record<string, string>, dep) => {
+        const { username, id } = dep;
+        acc[username] = id as string;
+        return acc;
+      }, {});
   }
 }
 
