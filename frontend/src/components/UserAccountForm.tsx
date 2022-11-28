@@ -23,47 +23,10 @@ const UserAccountForm: FC<FormProps> = (props) => {
 
   return (
     <form>
-      <div>
-        <label htmlFor="username">
-          Username
-          <br />
-          <input
-            type="text"
-            id="username"
-            name="username"
-            onChange={handleChange}
-            value={form.username}
-            placeholder="Your username here."
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password
-          <br />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            onChange={handleChange}
-            value={form.password}
-            placeholder="Your password here."
-          />
-        </label>
-      </div>
-      {message && (
-        <span>{message}</span>
-      )}
-      <div>
-        <button
-          type="button"
-          onClick={() => onSubmit()}
-        >
-          { isLogin ? 'LOGIN' : 'REGISTER' }
-        </button>
-        <br />
-        { isLogin && <Link to="/register">{'Don\'t have an account? Register now!'}</Link> }
-      </div>
+      <Button
+        innerText={isLogin ? 'LOGIN' : 'REGISTER'}
+        onClick={onSubmit}
+      />
     </form>
   );
 };

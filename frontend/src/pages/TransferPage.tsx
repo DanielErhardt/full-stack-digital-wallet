@@ -40,39 +40,12 @@ const TransferPage = () => {
 
   return (
     <main>
-      <label htmlFor="usr">
-        Transfer to:
-        <br />
-        <input
-          id="usr"
-          type="text"
-          name="username"
-          value={form.username}
-          placeholder="Receiver username here."
-          onChange={handleChange}
+
+        <Button
+          innerText="Transfer"
+          onClick={transfer}
         />
-      </label>
-      <br />
-      <label htmlFor="val">
-        Transfer amount:
-        <br />
-        <input
-          id="val"
-          type="number"
-          name="value"
-          placeholder="Transfer value here."
-          value={Number(form.value)}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <button
-        type="button"
-        onClick={() => transfer()}
-      >
-        Transfer
-      </button>
-      {message && <p>{message}</p>}
+
     </main>
   );
 };

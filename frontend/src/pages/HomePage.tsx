@@ -23,36 +23,23 @@ const HomePage = () => {
   return (
     <main>
       <Header />
-      <div>
-        {`R$ ${balance}`}
-        <button
-          type="button"
-          onClick={() => updateBalance()}
-        >
-          Update
-        </button>
-      </div>
-      <div>
-
-        <button
-          type="button"
+      <AccountBalance balance={balance} updateBalance={updateBalance} />
+      <div className="home-buttons">
+        <Button
+          innerText="Transfer"
           onClick={() => navigate('/transfer')}
-        >
-          Transfer
-        </button>
-        <button
-          type="button"
+        />
+
+        <Button
+          innerText="Transactions"
           onClick={() => navigate('/transactions')}
-        >
-          Transactions
-        </button>
+        />
+
         {role === 'guardian' && (
-        <button
-          type="button"
+        <Button
+          innerText="Dependents"
           onClick={() => navigate('/dependents')}
-        >
-          Dependents
-        </button>
+        />
         )}
       </div>
     </main>
