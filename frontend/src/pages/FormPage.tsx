@@ -40,7 +40,7 @@ const FormPage: FC = () => {
   };
 
   return (
-    <main>
+      <img className="form-logo" src={`${process.env.PUBLIC_URL}/ng-cash-logo.jpg`} alt="logo" />
       <UserAccountForm
         onSubmit={onSubmit}
         isLogin={isLogin}
