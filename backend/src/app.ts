@@ -3,7 +3,6 @@ import express from 'express';
 import cors from 'cors';
 import errorHandler from './middlewares/errorHandler';
 import { usersRouter } from './routers/users';
-import { accountsRouter } from './routers/accounts';
 import { transactionsRouter } from './routers/transactions';
 
 class App {
@@ -21,7 +20,6 @@ class App {
     this.app.use(express.json());
     this.app.use(cors());
     this.app.use('/users', usersRouter);
-    this.app.use('/accounts', accountsRouter);
     this.app.use('/transactions', transactionsRouter);
     this.app.use(errorHandler);
   }
