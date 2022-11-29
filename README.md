@@ -5,7 +5,7 @@
 
 ## Objetivo
 
-Construir uma aplicação de carteira digital full stack com as seguintes ferramentas:
+Construir uma aplicação full stack de carteira digital com as seguintes ferramentas:
 
 ### Frontend:
 
@@ -99,7 +99,7 @@ npm run compose:down
 
 ## Objective
 
-To build a digital wallet full stack app with the following tools:
+To build a full stack digital wallet app with the following tools:
 
 ### Frontend:
 
