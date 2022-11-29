@@ -1,6 +1,6 @@
 # Full Stack Digital Wallet
 
-<details open> 
+<details> 
 <summary>:brazil: Versão em Português</summary>
 
 ## Objetivo
