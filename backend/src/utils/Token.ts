@@ -3,7 +3,7 @@ import {
 } from 'jsonwebtoken';
 
 class Token {
-  private static secret = process.env.JWT_SECRET as string;
+  private static secret = process.env.JWT_SECRET || 'jwt_secret';
 
   private static options: SignOptions = {
     algorithm: 'HS256',
