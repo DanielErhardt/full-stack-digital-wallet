@@ -26,7 +26,6 @@ services:
     ports:
       - 3001:3001
     restart: always
-    command: npm run dev
     volumes: 
       - ./backend/src:/api/src
     depends_on:
