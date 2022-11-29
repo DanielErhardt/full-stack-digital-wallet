@@ -64,6 +64,12 @@ npm run db:build
 
 Após a conclusão da execução do comando é só acessar http://localhost:3000/ e usar a aplicação.
 
+- Para remover os containers docker ao terminar de usar o aplicativo:
+
+```
+npm run compose:down
+```
+
 <br />
 
 ## API Endpoints
@@ -151,6 +157,12 @@ npm run db:build
 ```
 
 Then you can go to http://localhost:3000/ and use the application.
+
+- To remove the container when you are done:
+
+```
+npm run compose:down
+```
 
 <br />
 
