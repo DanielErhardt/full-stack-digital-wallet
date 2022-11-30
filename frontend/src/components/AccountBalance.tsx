@@ -11,9 +11,10 @@ const AccountBalance: FC<AccountBalanceType> = ({ balance, updateBalance }) => (
     {`R$ ${balance}`}
 
     <Button
-      innerText="Update"
       onClick={updateBalance}
-    />
+    >
+      Update
+    </Button>
   </form>
 );
 

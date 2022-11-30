@@ -69,9 +69,10 @@ const TransferPage = () => {
         </label>
 
         <Button
-          innerText="Transfer"
           onClick={transfer}
-        />
+        >
+          Transfer
+        </Button>
 
         <p className="form-message">{message}</p>
       </form>

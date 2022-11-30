@@ -50,9 +50,10 @@ const UserAccountForm: FC<FormProps> = (props) => {
       </label>
 
       <Button
-        innerText={isLogin ? 'LOGIN' : 'REGISTER'}
         onClick={onSubmit}
-      />
+      >
+        {isLogin ? 'LOGIN' : 'REGISTER'}
+      </Button>
 
       <p className="form-message">{message}</p>
     </form>

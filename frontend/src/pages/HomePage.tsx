@@ -28,20 +28,23 @@ const HomePage = () => {
       <AccountBalance balance={balance} updateBalance={updateBalance} />
       <div className="home-buttons">
         <Button
-          innerText="Transfer"
           onClick={() => navigate('/transfer')}
-        />
+        >
+          Transfer
+        </Button>
 
         <Button
-          innerText="Transactions"
           onClick={() => navigate('/transactions')}
-        />
+        >
+          Transactions
+        </Button>
 
         {role === 'guardian' && (
         <Button
-          innerText="Dependents"
           onClick={() => navigate('/dependents')}
-        />
+        >
+          Dependents
+        </Button>
         )}
       </div>
     </main>

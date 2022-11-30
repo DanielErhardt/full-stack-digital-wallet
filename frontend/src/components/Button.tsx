@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 
 type ButtonType = {
-  innerText: string;
+  children: React.ReactNode;
   onClick: Function;
 };
 
-const Button: FC<ButtonType> = ({ innerText, onClick }) => (
+const Button: FC<ButtonType> = ({ children, onClick }) => (
   <button
     className="default-btn"
     type="button"
     onClick={() => onClick()}
   >
-    {innerText}
+    {children}
   </button>
 );
 

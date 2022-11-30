@@ -11,9 +11,10 @@ const Header = () => {
         {`Hello, ${username}`}
       </h3>
       <Button
-        innerText="Logout"
         onClick={logout}
-      />
+      >
+        Logout
+      </Button>
     </header>
   );
 };
