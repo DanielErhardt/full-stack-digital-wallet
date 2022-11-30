@@ -6,6 +6,6 @@
     "compose:down:dev": "docker-compose -f docker-compose.dev.yml down --remove-orphans",
     "logs": "docker-compose logs -f",
     "logs:dev": "docker-compose -f docker-compose.dev.yml logs -f",
-    "db:build": "docker exec ng-cash_backend sh -c 'npm run db:reset'"
+    "db:build": "docker exec wallet_backend sh -c 'npm run db:reset'"
   }
 }

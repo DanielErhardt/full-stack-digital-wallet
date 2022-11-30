@@ -2,6 +2,7 @@ import React, {
   ChangeEventHandler, FC, useContext, useEffect, useState,
 } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Wallet } from 'phosphor-react';
 import { FormInput } from '../@types/FormInput';
 import UserAccountForm from '../components/UserAccountForm';
 import NGCashContext from '../context/NGCashContext';
@@ -41,7 +42,7 @@ const FormPage: FC = () => {
 
   return (
     <main className="form-page">
-      <img className="form-logo" src={`${process.env.PUBLIC_URL}/ng-cash-logo.jpg`} alt="logo" />
+      <Wallet size={256} />
       <UserAccountForm
         onSubmit={onSubmit}
         isLogin={isLogin}

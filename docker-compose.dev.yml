@@ -3,25 +3,22 @@ services:
   database:
     image: postgres
     platform: linux/x86_64
-    container_name: ng-cash_db
+    container_name: wallet_db
     restart: always
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: ng-cash
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready", "-d", "db_prod" ]
-      timeout: 10s
-      retries: 5
+      POSTGRES_DB: wallet
     networks:
-      - ng-cash_back-db
+      - wallet_back-db
 
   backend:
     platform: linux/x86_64
-    container_name: ng-cash_backend
+    container_name: wallet_backend
     build: ./backend
+    command: npm run dev
     working_dir: /api
     ports:
       - 3001:3001
@@ -29,19 +26,14 @@ services:
     volumes: 
       - ./backend/src:/api/src
     depends_on:
-      database:
-        condition: service_healthy
-    healthcheck:
-      test: [ "CMD", "lsof", "-t", "-i:3001" ]
-      timeout: 10s
-      retries: 5
+      - database
     networks:
-      - ng-cash_front-back
-      - ng-cash_back-db
+      - wallet_front-back
+      - wallet_back-db
 
   frontend:
     platform: linux/x86_64
-    container_name: ng-cash_frontend
+    container_name: wallet_frontend
     build: ./frontend
     ports:
       - 3000:3000
@@ -50,15 +42,10 @@ services:
     volumes: 
       - ./frontend/src:/app/src
     depends_on:
-      backend:
-        condition: service_healthy
-    healthcheck:
-      test: [ "CMD", "lsof", "-t", "-i:3000" ]
-      timeout: 10s
-      retries: 5
+      - backend
     networks:
-      - ng-cash_front-back
+      - wallet_front-back
 
 networks:
-  ng-cash_front-back: {}
-  ng-cash_back-db: {}
+  wallet_front-back: {}
+  wallet_back-db: {}
