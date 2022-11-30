@@ -8,13 +8,13 @@ type AccountBalanceType = {
 };
 
 const AccountBalance: FC<AccountBalanceType> = ({ balance, updateBalance }) => (
-  <form className="account-form">
+  <form className="account-form account-balance">
     {`R$ ${balance}`}
 
     <Button
       onClick={updateBalance}
     >
-      Update
+      <ArrowClockwise size={32} weight="bold" />
     </Button>
   </form>
 );

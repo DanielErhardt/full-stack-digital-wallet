@@ -177,3 +177,15 @@ main {
 .trn-date {
   align-self: flex-end;
 }
+
+.account-balance {
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px
+}
+
+.account-balance button {
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+}
