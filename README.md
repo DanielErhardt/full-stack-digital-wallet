@@ -158,7 +158,7 @@ npm run db:build
 
 Then you can go to http://localhost:3000/ and use the application.
 
-- To remove the container when you are done:
+- To remove the docker containers when you are done:
 
 ```
 npm run compose:down
